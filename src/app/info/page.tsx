@@ -183,9 +183,9 @@ export default function InfoPage() {
   }, [allItemsData, searchTerm, selectedCategory, selectedRecommendation, sortOrder]);
   const categories = [
     { key: "all", label: "Semua", icon: Package },
-    { key: "ingots", label: "Ingots & Raw Materials", icon: DollarSign },
-    { key: "gems", label: "Gems", icon: Gem },
-    { key: "base", label: "Base Components", icon: Target },
+    { key: "ingots", label: "Batangan & Bahan Mentah", icon: DollarSign },
+    { key: "gems", label: "Permata", icon: Gem },
+    { key: "base", label: "Komponen Dasar", icon: Target },
     { key: "rings", label: "Rings", icon: TrendingUp },
     { key: "earrings", label: "Earrings", icon: TrendingUp },
     { key: "necklaces", label: "Necklaces", icon: TrendingUp },
@@ -292,10 +292,10 @@ export default function InfoPage() {
                   value={selectedRecommendation}
                   onChange={(e) => setSelectedRecommendation(e.target.value as RecommendationFilter)}
                 >
-                  <option value="all">Semua Rekomendasi</option>
+                  <option value="all">Semua Kategori</option>
                   <option value="topPriority">Prioritas Utama</option>
                   <option value="recommended">Direkomendasikan</option>
-                  <option value="lowProfit">Profit Rendah</option>
+                  <option value="lowProfit">Untung Rendah</option>
                 </select>
                 <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                   <Sparkles className="h-5 w-5 text-gray-400" />
@@ -309,8 +309,8 @@ export default function InfoPage() {
                   value={sortOrder}
                   onChange={(e) => setSortOrder(e.target.value as "desc" | "asc")}
                 >
-                  <option value="desc">Profit Margin: High to Low</option>
-                  <option value="asc">Profit Margin: Low to High</option>
+                  <option value="desc">Keuntungan: Tinggi ke Rendah</option>
+                  <option value="asc">Keuntungan: Rendah ke Tinggi</option>
                 </select>
                 <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                   <TrendingUp className="h-5 w-5 text-gray-400" />
@@ -324,7 +324,7 @@ export default function InfoPage() {
                 <div className="text-2xl font-bold text-blue-400">
                   {filteredAndSortedItems.length}
                 </div>
-                <div className="text-sm text-gray-400">Total Item</div>
+                <div className="text-sm text-gray-400">Total Barang</div>
               </div>{" "}
               <div className="bg-gray-800/50 rounded-lg p-3 text-center">
                 <div className="text-2xl font-bold text-green-400">
@@ -334,7 +334,7 @@ export default function InfoPage() {
                     ).length
                   }
                 </div>
-                <div className="text-sm text-gray-400">Profitable</div>
+                <div className="text-sm text-gray-400">Menguntungkan</div>
               </div>
               <div className="bg-gray-800/50 rounded-lg p-3 text-center">
                 <div className="text-2xl font-bold text-blue-400">
@@ -344,7 +344,7 @@ export default function InfoPage() {
                     ).length
                   }
                 </div>
-                <div className="text-sm text-gray-400">Base Components</div>
+                <div className="text-sm text-gray-400">Komponen Dasar</div>
               </div>
               <div className="bg-gray-800/50 rounded-lg p-3 text-center">
                 <div className="text-2xl font-bold text-purple-400">
@@ -354,7 +354,7 @@ export default function InfoPage() {
                     ).length
                   }
                 </div>
-                <div className="text-sm text-gray-400">Raw Material</div>
+                <div className="text-sm text-gray-400">Bahan Mentah</div>
               </div>
             </div>
           </div>
@@ -431,7 +431,7 @@ export default function InfoPage() {
                         {item.profitMargin > 0 && (
                           <div className="flex justify-between text-sm mt-1">
                             <span className="text-purple-300">
-                              Profit Margin:
+                              Margin Keuntungan:
                             </span>
                             <span
                               className={`font-semibold ${getProfitColor(item.profit, item.profitMargin, item.name)}`}
@@ -444,23 +444,23 @@ export default function InfoPage() {
                     )}
                   </div>
                 )}
-                {/* Raw Material Indicator */}
+                {/* Bahan Mentah Indicator */}
                 {!item.hasRequirements && (
                   <div className="p-4 bg-gray-800/30">
                     <div className="flex items-center justify-center space-x-2 text-orange-400">
                       <Package className="h-4 w-4" />
-                      <span className="text-sm font-medium">Raw Material</span>
+                      <span className="text-sm font-medium">Bahan Mentah</span>
                     </div>
                   </div>
                 )}{" "}
-                {/* Profit Recommendation */}
+                {/* Rekomendasi Keuntungan */}
                 {item.hasRequirements && (
                   <div className="p-3">
                     {isBaseComponent(item.name) && (
                       <div className="flex items-center space-x-2 text-blue-400 text-sm">
                         <Package className="h-4 w-4" />
                         <span className="font-semibold">
-                          Base Component - Diperlukan untuk Crafting
+                          Komponen Dasar - Diperlukan untuk Crafting
                         </span>
                       </div>
                     )}
@@ -468,7 +468,7 @@ export default function InfoPage() {
                       <div className="flex items-center space-x-2 text-green-400 text-sm">
                         <ArrowUpRight className="h-4 w-4" />
                         <span className="font-semibold">
-                          Sangat Profitable - Prioritas Utama
+                          Sangat Menguntungkan - Prioritas Utama
                         </span>
                       </div>
                     )}
@@ -478,7 +478,7 @@ export default function InfoPage() {
                         <div className="flex items-center space-x-2 text-blue-400 text-sm">
                           <ArrowUpRight className="h-4 w-4" />
                           <span className="font-semibold">
-                            Profitable - Direkomendasikan
+                            Menguntungkan - Direkomendasikan
                           </span>
                         </div>
                       )}
@@ -487,13 +487,13 @@ export default function InfoPage() {
                       item.profitMargin < 25 && (
                         <div className="flex items-center space-x-2 text-orange-400 text-sm">
                           <ArrowUpRight className="h-4 w-4" />
-                          <span className="font-semibold">Profit Rendah</span>
+                          <span className="font-semibold">Untung Rendah</span>
                         </div>
                       )}
                     {!isBaseComponent(item.name) && item.profit <= 0 && (
                       <div className="flex items-center space-x-2 text-red-400 text-sm">
                         <span className="font-semibold">
-                          ❌ Tidak Profitable
+                          ❌ Tidak Menguntungkan
                         </span>
                       </div>
                     )}
