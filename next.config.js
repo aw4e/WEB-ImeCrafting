@@ -1,8 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  experimental: {
-    turbo: false, // paksa pakai webpack, bukan turbopack
-  },
-}
+const nextConfig = {}
 
 module.exports = nextConfig
