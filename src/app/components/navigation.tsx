@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Info } from "lucide-react";
+import { Home, Info, Edit } from "lucide-react";
 
 const navItems = [
   {
@@ -15,6 +15,11 @@ const navItems = [
     label: "Info",
     icon: Info,
   },
+  {
+    href: "/custom",
+    label: "Custom Item Price",
+    icon: Edit,
+  }
 ];
 
 const Navigation = () => {

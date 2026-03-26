@@ -7,7 +7,7 @@ import {
   RequirementInfo,
   MiningData,
 } from "@/types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import miningData from "@/data/mining.json";
 import {
@@ -27,6 +27,7 @@ import {
   Timer,
   Activity,
 } from "lucide-react";
+
 
 const materialCategories = {
   "Raw Materials": [
@@ -108,6 +109,16 @@ const createEmptyInventory = (): Inventory => {
 };
 
 export default function CraftingOptimizer() {
+  const [typedMiningData, setTypedMiningData] = useState<MiningData>(
+    miningData as MiningData
+  );
+
+  useEffect(() => {
+    const saved = localStorage.getItem("customPrices");
+    if (saved) {
+      setTypedMiningData(JSON.parse(saved));
+    }
+  }, []);
   const [inventory, setInventory] = useState<Inventory>(createEmptyInventory());
   const [result, setResult] = useState<OptimizationResult["data"] | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -126,7 +137,10 @@ export default function CraftingOptimizer() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ inventory }),
+        body: JSON.stringify({
+          inventory,
+          customPrices: JSON.parse(localStorage.getItem("customPrices") || "{}")
+         }),
       });
 
       if (!response.ok) {
@@ -197,7 +211,6 @@ export default function CraftingOptimizer() {
     return Object.values(inventory).reduce((sum, count) => sum + count, 0);
   };
   const getItemPrice = (itemName: string): number => {
-    const typedMiningData = miningData as MiningData;
     const allItems = {
       ...typedMiningData.tambang,
       ...typedMiningData.perhiasan,

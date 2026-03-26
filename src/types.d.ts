@@ -73,6 +73,7 @@ export interface OptimizationResult {
 
 export interface ApiRequest {
   inventory: Inventory;
+  customPrices: MiningData;
 }
 
 export interface FloatingIcon {
