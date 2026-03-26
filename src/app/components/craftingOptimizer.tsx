@@ -53,6 +53,7 @@ const materialCategories = {
     "diamond",
     "ruby",
     "emerald",
+    "glass",
   ],
   Rings: [
     "gold_ring",
@@ -60,6 +61,7 @@ const materialCategories = {
     "emerald_ring",
     "ruby_ring",
     "sapphire_ring",
+    "diamond_ring",
     "diamond_ring_silver",
     "emerald_ring_silver",
     "ruby_ring_silver",
@@ -80,6 +82,7 @@ const materialCategories = {
   Necklaces: [
     "gold_chain",
     "silver_chain",
+    "diamond_necklace",
     "ruby_necklace",
     "sapphire_necklace",
     "emerald_necklace",
